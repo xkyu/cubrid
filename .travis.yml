@@ -17,3 +17,12 @@ addons:
 
 script:
   - mkdir build && cd build && cmake .. && make
+
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_OAUTH_TOKEN
+  file: README.md
+  skip_cleanup: true
+  on:
+    tags: true
