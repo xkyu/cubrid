@@ -18,6 +18,8 @@ addons:
 script:
   - mkdir build && cd build && cmake .. && make
 
+before_deploy: pwd
+
 deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
