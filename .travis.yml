@@ -12,6 +12,7 @@ os:
 - linux
 
 script:
-  - docker run -v./cubrid:/home/cubrid -v./CUBRID:/home/CUBRID -e MAKEFLAGS='-j 2' cubridci/build
+  - mkdir CUBRID
+  - docker run --name build -v`pwd`/cubrid:/home/cubrid -v`pwd`/CUBRID:/home/CUBRID -e MAKEFLAGS='-j 2' cubridci/build
   - ls
   - ls -al CUBRID
