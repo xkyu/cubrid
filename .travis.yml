@@ -5,13 +5,5 @@ services:
 
 language: c
 
-compiler:
-  - gcc
-
-os:
-- linux
-
 script:
-  - mkdir ../CUBRID
-  - docker run -v`pwd`/..:/home/cubrid -v`pwd`/../CUBRID:/home/CUBRID -e MAKEFLAGS='-j2' cubridci/build
-  - docker run -v`pwd`/..:/home/cubrid -v`pwd`/../CUBRID:/home/CUBRID cubridci/test
+  - env
