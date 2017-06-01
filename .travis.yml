@@ -13,6 +13,5 @@ os:
 
 script:
   - mkdir ../CUBRID
-  - docker run --name build -v`pwd`/..:/home/cubrid -v`pwd`/../CUBRID:/home/CUBRID -e MAKEFLAGS='-j2' cubridci/build
-  - git clone --depth 1 https://github.com/CUBRID/cubrid-testtools ../cubrid-testtools && git clone --depth 1 https://github.com/CUBRID/cubrid-testcases ../cubrid-testcases
-  - docker run --name build -v`pwd`/..:/home/cubrid -v`pwd`/../CUBRID:/home/CUBRID cubridci/test
+  - docker run -v`pwd`/..:/home/cubrid -v`pwd`/../CUBRID:/home/CUBRID -e MAKEFLAGS='-j2' cubridci/build
+  - docker run -v`pwd`/..:/home/cubrid -v`pwd`/../CUBRID:/home/CUBRID cubridci/test
