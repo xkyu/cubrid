@@ -11,6 +11,7 @@ before_install:
 script:
   - env
   - asdfi
+  - FAILED=$?
 
 after_failure:
-  - FAILED="$?" && [ "$TRAVIS_PULL_REQUEST" != "false" ] && ghi comment -m "failed. [$FAILED]" $TRAVIS_PULL_REQUEST
+  - [ "$TRAVIS_PULL_REQUEST" != "false" ] && ghi comment -m "failed. [$FAILED]" $TRAVIS_PULL_REQUEST
