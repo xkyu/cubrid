@@ -9,12 +9,12 @@ before_install:
   - gem install ghi
 
 script:
-  - env
-  - xocker run -v`pwd`/..:/home/cubrid -v`pwd`/../CUBRID:/home/CUBRID cubridci/test || { TESTS_FAILED=$?; false; }
+  - docker run -v`pwd`/..:/home/cubrid -v`pwd`/../CUBRID:/home/CUBRID -e MAKEFLAGS='-j2' cubridci/build || { BUILD_FAILED=$?; false; }
+  - docker run -v`pwd`/..:/home/cubrid -v`pwd`/../CUBRID:/home/CUBRID cubridci/test || { TESTS_FAILED=$?; false; }
 
 after_failure: |
   if [ "$TRAVIS_PULL_REQUEST" != "false" -a ${TESTS_FAILED:-0} -gt 0 ]; then
     TRAVIS_CURRENT_BUILD_URL="https://travis-ci.org/$TRAVIS_REPO_SLUG/builds/$TRAVIS_BUILD_ID"
-    PR_COMMENT="There are $TESTS_FAILED failed Testcases on this test. Please check the [log]($TRAVIS_CURRENT_BUILD_URL) on Travis"
+    PR_COMMENT="There are $TESTS_FAILED failed Testcases. Please check the [log]($TRAVIS_CURRENT_BUILD_URL) on Travis"
     ghi comment -m "$PR_COMMENT" $TRAVIS_PULL_REQUEST
   fi
