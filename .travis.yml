@@ -10,8 +10,7 @@ before_install:
 
 script:
   - env
-  - docker run -v`pwd`/..:/home/cubrid -v`pwd`/../CUBRID:/home/CUBRID -e MAKEFLAGS='-j2' cubridci/build
-  - docker run -v`pwd`/..:/home/cubrid -v`pwd`/../CUBRID:/home/CUBRID cubridci/test
+  - asdfa
 
 after_failure:
   - FAILED="$?" && [ "$TRAVIS_FULL_REQUEST" != "false" ] && ghi comment -m "failed. [$FAILED]" $TRAVIS_FULL_REQUEST
