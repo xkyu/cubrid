@@ -14,4 +14,4 @@ script:
   - FAILED=$?
 
 after_failure:
-  - [ "$TRAVIS_PULL_REQUEST" != "false" ] && ghi comment -m "failed. [$FAILED]" $TRAVIS_PULL_REQUEST
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then ghi comment -m "failed. [$FAILED]" $TRAVIS_PULL_REQUEST; fi
