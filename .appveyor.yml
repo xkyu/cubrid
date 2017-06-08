@@ -3,7 +3,7 @@ version: "{build}"
 environment:
   CMAKE_GENERATOR: "Visual Studio 14 2015 Win64"
   BUILD_TYPE: RelWithDebInfo
-  BUILD_PREFIX: "C:\CUBRID"
+  BUILD_PREFIX: "C:/CUBRID"
 
 matrix:
   fast_finish: true
