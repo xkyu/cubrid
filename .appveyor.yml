@@ -9,7 +9,7 @@ matrix:
   fast_finish: true
 
 install:
-  - cmd: choco install ant -y -f -i
+  - cinst ant
 
 build_script:
   - md build
