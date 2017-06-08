@@ -9,8 +9,8 @@ before_install:
   - gem install ghi
 
 script:
-  - docker run -v`pwd`/..:/home/cubrid -v`pwd`/../CUBRID:/home/CUBRID -e MAKEFLAGS='-j2' cubridci/build || { BUILD_FAILED=$?; false; }
-  - docker run -v`pwd`/..:/home/cubrid -v`pwd`/../CUBRID:/home/CUBRID cubridci/test || { TESTS_FAILED=$?; false; }
+  - docker run -v$TRAVIS_BUILD_DIR/..:/home/cubrid -v$TRAVIS_BUILD_DIR/../CUBRID:/home/CUBRID -e MAKEFLAGS='-j2' cubridci/build || { BUILD_FAILED=$?; false; }
+  - docker run -v$TRAVIS_BUILD_DIR/..:/home/cubrid -v$TRAVIS_BUILD_DIR/../CUBRID:/home/CUBRID cubridci/test || { TESTS_FAILED=$?; false; }
 
 after_failure: |
   if [ "$TRAVIS_PULL_REQUEST" != "false" -a ${TESTS_FAILED:-0} -gt 0 ]; then
