@@ -8,6 +8,14 @@ environment:
 matrix:
   fast_finish: true
 
+install:
+  - cmd: choco install ant -y -f -i
+  - cmd: refreshenv
+  - cmd: cmake --version
+  - cmd: java -version
+  - cmd: ant -version
+
+
 build_script:
   - md build
   - cd /d build
