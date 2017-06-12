@@ -9,7 +9,7 @@ dependencies:
 test:
   override:
     - env
-    - false || TESTS_FAILED=$?
+    - false || export TESTS_FAILED=$?
     - echo "result $TESTS_FAILED"
     - |
       if [ -n "$CI_PULL_REQUEST" -a ${TESTS_FAILED:-0} -gt 0 ]; then
