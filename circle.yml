@@ -10,6 +10,7 @@ test:
   override:
     - env
     - false || TESTS_FAILED=$?
+    - echo "result: $TESTS_FAILED"
     - |
       if [ -n "$CI_PULL_REQUEST" -a ${TESTS_FAILED:-0} -gt 0 ]; then
         CURRENT_LOG_URL="$CIRCLE_BUILD_URL"
