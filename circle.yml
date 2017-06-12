@@ -6,13 +6,10 @@ dependencies:
   pre:
     - gem install ghi
 
-compile:
-  override:
-    - docker run -v $HOME:/home/cubrid -v $HOME/CUBRID:/home/CUBRID -e MAKEFLAGS='-j2' cubridci/build
-
 test:
   override:
-    - docker run -v $HOME/CUBRID:/home/CUBRID -e TEST_SUITE="medium" cubridci/test ; false || TESTS_FAILED=$?
+    - env
+    - false || TESTS_FAILED=$?
     - |
       if [ -n "$CI_PULL_REQUEST" -a ${TESTS_FAILED:-0} -gt 0 ]; then
         CURRENT_LOG_URL="$CIRCLE_BUILD_URL"
