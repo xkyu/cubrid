@@ -1,0 +1,12 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - sudo apt-get update; sudo apt-get install cmake systemtap-sdt-dev libelf-dev
+    - gem install ghi
+
+compile:
+  override:
+    - mkdir build && cd build && cmake .. && make
