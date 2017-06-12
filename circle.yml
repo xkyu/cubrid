@@ -12,8 +12,8 @@ dependencies:
 compile:
   override:
     - env
-    - mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX="$HOME/cubrid" .. && make all install
+    - mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX="$HOME/CUBRID" .. && make all install
 
 test:
   override:
-    - docker version
+    - docker run -v $HOME/CUBRID:/home/CUBRID cubridci/test
