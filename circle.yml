@@ -1,19 +1,20 @@
 machine:
   services:
     - docker
-  environment:
-    MAKEFLAGS: -j2
 
 dependencies:
   pre:
-    - sudo apt-get update; sudo apt-get install cmake bison flex systemtap-sdt-dev libelf-dev
     - gem install ghi
 
 compile:
   override:
-    - env
-    - mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX="$HOME/CUBRID" .. && make all install
+    - docker run -v $HOME:/home/cubrid -v $HOME/CUBRID:/home/CUBRID -e MAKEFLAGS='-j2' cubridci/build
 
 test:
-  override:
-    - docker run -v $HOME/CUBRID:/home/CUBRID cubridci/test
+  override: |
+    docker run -v $HOME/CUBRID:/home/CUBRID cubridci/test || TESTS_FAILED=$?
+    if [ -n "$CI_PULL_REQUEST" -a ${TESTS_FAILED:-0} -gt 0 ]; then
+      CURRENT_LOG_URL="$CIRCLE_BUILD_URL"
+      PR_COMMENT="There are $TESTS_FAILED failed Testcases. Please check the [log]($CURRENT_LOG_URL)"
+      ghi comment -m "$PR_COMMENT" ${CI_PULL_REQUEST##*/}
+    fi
