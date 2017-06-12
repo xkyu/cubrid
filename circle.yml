@@ -4,12 +4,12 @@ machine:
 
 dependencies:
   pre:
-    - sudo apt-get update; sudo apt-get install cmake systemtap-sdt-dev libelf-dev
+    - sudo apt-get update; sudo apt-get install cmake bison flex systemtap-sdt-dev libelf-dev
     - gem install ghi
 
 compile:
   override:
-    - mkdir build && cd build && cmake .. && make
+    - mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/home/cubrid .. && cmake --build .
 
 test:
   override:
