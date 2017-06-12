@@ -8,12 +8,11 @@ dependencies:
 
 test:
   override:
-    - env
     - |
       false || { TESTS_FAILED=$?
         if [ -n "$CI_PULL_REQUEST" -a ${TESTS_FAILED:-0} -gt 0 ]; then
           CURRENT_LOG_URL="$CIRCLE_BUILD_URL"
-          PR_COMMENT="There are $TESTS_FAILED failed Testcases. Please check the [log]($CURRENT_LOG_URL)"
+          PR_COMMENT="There are $TESTS_FAILED failed Testcases. Please check the [log]($CURRENT_LOG_URL)."
           ghi comment -m "$PR_COMMENT" ${CI_PULL_REQUEST##*/}
         fi
       }
