@@ -10,3 +10,7 @@ dependencies:
 compile:
   override:
     - mkdir build && cd build && cmake .. && make
+
+test:
+  override:
+    - docker version
