@@ -20,7 +20,7 @@ test:
                <property name="project.jdk.classpath" value="jdk.classpath.1.6" />
             </properties>
             <testcase classname="JUnitXmlReporter.constructor" name="should default path to an empty string" time="0.006">
-               <failure message="test failure">Assertion failed</failure>
+               <failure/>
             </testcase>
             <testcase classname="JUnitXmlReporter.constructor" name="should default consolidate to true" time="0">
                <skipped />
