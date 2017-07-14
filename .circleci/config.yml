@@ -36,5 +36,5 @@ workflows:
     jobs:
       - build
       - test_medium:
-        requires:
-          - build
+          requires:
+            - build
