@@ -1,9 +1,12 @@
+defaults: &defaults
+  working_directory: ~/cubrid
+  docker:
+    - image: cubridci/cubridci
+
 version: 2
 jobs:
   build:
-    working_directory: ~/cubrid
-    docker:
-      - image: cubridci/cubridci
+    <<: *defaults
 
     environment:
       MAKEFLAGS: -j2
@@ -14,24 +17,20 @@ jobs:
       - run: env && ls
 
       - persist_to_workspace:
-	root: .
-	paths:
-	  - CUBRID
+        root: .
+        paths:
+          - CUBRID
 
   test_medium:
-    working_directory: ~/cubrid
-    docker:
-      - image: cubridci/cubridci
-
+    <<: *defaults
 
     environment:
       TEST_SUITE: medium
 
     steps:
       - attach_workspace:
-	at: CUBRID
+        at: CUBRID
       - run: env && ls
-
 
 workflows:
   version: 2
