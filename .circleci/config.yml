@@ -12,11 +12,10 @@ jobs:
       - checkout:
           path: cubrid
       - run: env && ls
-
       - persist_to_workspace:
-        root: .
-        paths:
-          - CUBRID
+          root: .
+          paths:
+            - CUBRID
 
   test_medium:
     working_directory: ~/cubrid
@@ -36,4 +35,6 @@ workflows:
   build_test:
     jobs:
       - build
-      - test_medium
+      - test_medium:
+        requires:
+          - build
