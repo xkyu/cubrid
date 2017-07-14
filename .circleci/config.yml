@@ -1,12 +1,9 @@
-defaults: &defaults
-  working_directory: ~/cubrid
-  docker:
-    - image: cubridci/cubridci
-
 version: 2
 jobs:
   build:
-    <<: *defaults
+    working_directory: ~/cubrid
+    docker:
+      - image: cubridci/cubridci
 
     environment:
       MAKEFLAGS: -j2
@@ -22,7 +19,9 @@ jobs:
           - CUBRID
 
   test_medium:
-    <<: *defaults
+    working_directory: ~/cubrid
+    docker:
+      - image: cubridci/cubridci
 
     environment:
       TEST_SUITE: medium
