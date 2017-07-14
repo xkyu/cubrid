@@ -10,7 +10,7 @@ jobs:
     
     steps:
       - checkout:
-        path: cubrid
+          path: cubrid
       - run: env && ls
 
       - persist_to_workspace:
@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - attach_workspace:
-        at: CUBRID
+          at: CUBRID
       - run: env && ls
 
 workflows:
