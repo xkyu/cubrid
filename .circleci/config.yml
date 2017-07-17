@@ -3,6 +3,15 @@ defaults: &defaults
   docker:
     - image: cubridci/cubridci
 
+test_defaults: &test_defaults
+  steps:
+    - attach_workspace:
+        at: .
+    - run:
+        name: Test $TEST_SUITE
+        shell: /bin/bash
+        command: /entrypoint.sh test
+
 version: 2
 jobs:
   build:
@@ -13,7 +22,9 @@ jobs:
     steps:
       - checkout:
           path: cubrid
-      - run: /entrypoint.sh build
+      - run:
+          name: Build
+          command: /entrypoint.sh build
       - persist_to_workspace:
           root: .
           paths:
@@ -23,13 +34,13 @@ jobs:
     <<: *defaults
     environment:
       TEST_SUITE: medium
+    <<: *test_defaults
 
-    steps:
-      - attach_workspace:
-          at: .
-      - run: env && ls
-      - run: ls -lR CUBRID
-      - run: /entrypoint.sh test
+  test_sql:
+    <<: *defaults
+    environment:
+      TEST_SUITE: sql
+    <<: *test_defaults
 
 workflows:
   version: 2
@@ -37,5 +48,8 @@ workflows:
     jobs:
       - build
       - test_medium:
+          requires:
+            - build
+      - test_sql:
           requires:
             - build
