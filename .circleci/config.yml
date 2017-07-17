@@ -28,6 +28,7 @@ jobs:
       - attach_workspace:
           at: CUBRID
       - run: env && ls
+      - run: ls -lR CUBRID
       - run: /entrypoint.sh test
 
 workflows:
