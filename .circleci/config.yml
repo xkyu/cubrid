@@ -11,7 +11,6 @@ jobs:
       MAKEFLAGS: -j2
     
     steps:
-      - run: env
       - checkout:
           path: cubrid
       - run: /entrypoint.sh build
