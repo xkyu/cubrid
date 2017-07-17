@@ -26,7 +26,7 @@ jobs:
 
     steps:
       - attach_workspace:
-          at: CUBRID
+          at: .
       - run: env && ls
       - run: ls -lR CUBRID
       - run: /entrypoint.sh test
