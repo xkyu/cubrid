@@ -11,6 +11,8 @@ test_defaults: &test_defaults
         name: Test
         shell: /bin/bash
         command: /entrypoint.sh test
+    - store_test_results:
+        path: $CUBRID/tmp/test
 
 version: 2
 jobs:
