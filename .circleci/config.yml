@@ -11,7 +11,8 @@ test_defaults: &test_defaults
         name: Test
         shell: /bin/bash
         command: |
-          circleci tests glob $CIRCLE_WORKING_DIRECTORY/cubrid-testcases/sql/_* | xargs -n1 -I{} bash -c "sed -i 's|^scenario=.*|scenario=$HOME/{}|' cubrid-testtools/CTP/conf/$TEST_SUITE.conf && /entrypoint.sh test"
+          echo $(circleci tests glob $CIRCLE_WORKING_DIRECTORY/cubrid-testcases/$TEST_SUITE/_*)
+          circleci tests glob $CIRCLE_WORKING_DIRECTORY/cubrid-testcases/$TEST_SUITE/_* | xargs -n1 echo
     - store_test_results:
         path: /tmp/tests
 
@@ -27,7 +28,7 @@ jobs:
           path: cubrid
       - run:
           name: Build
-          command: /entrypoint.sh build
+          command: echo /entrypoint.sh build
       - persist_to_workspace:
           root: .
           paths:
