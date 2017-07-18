@@ -8,7 +8,7 @@ test_defaults: &test_defaults
     - attach_workspace:
         at: .
     - run:
-        name: Test $TEST_SUITE
+        name: Test
         shell: /bin/bash
         command: /entrypoint.sh test
 
