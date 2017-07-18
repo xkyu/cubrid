@@ -15,7 +15,7 @@ test_defaults: &test_defaults
           git clone --depth 1 -q https://github.com/CUBRID/cubrid-testtools $CIRCLE_WORKING_DIRECTORY/cubrid-testtools
           git clone --depth 1 -q https://github.com/CUBRID/cubrid-testcases $CIRCLE_WORKING_DIRECTORY/cubrid-testcases
           circleci tests glob cubrid-testcases/$TEST_SUITE/_* | circleci tests split > testcases.list
-          find cubrid-testcases/$TEST_SUITE/_* -maxdepth 0 -type d -print0 | grep -vzZ -f testcases.list | xargs -0 rm -f
+          find cubrid-testcases/$TEST_SUITE/_* -maxdepth 0 -type d -print0 | grep -vzZ -f testcases.list | xargs -0 rm -rf
           /entrypoint.sh test
     - store_test_results:
         path: /tmp/tests
