@@ -4,7 +4,6 @@ defaults: &defaults
     - image: cubridci/cubridci
 
 test_defaults: &test_defaults
-  parallelism: 4
   steps:
     - attach_workspace:
         at: .
@@ -48,6 +47,7 @@ jobs:
     <<: *defaults
     environment:
       TEST_SUITE: sql
+    parallelism: 4
     <<: *test_defaults
 
 workflows:
