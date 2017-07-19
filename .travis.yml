@@ -6,6 +6,9 @@ compiler:
 os:
 - linux
 
+env:
+  - MAKEFLAGS='-j2'
+
 addons:
   apt:
     sources:
